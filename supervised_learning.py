@@ -23,6 +23,7 @@ def train(model, train_loader, labeled_eval_loader, args):
         exp_lr_scheduler.step()
         for batch_idx, (x, label, idx) in enumerate(tqdm(train_loader)):
             x, label = x.to(device), label.to(device)
+            print(x.shape)
             output = model(x)
             loss= criterion(output, label)
             loss_record.update(loss.item(), x.size(0))
@@ -73,7 +74,7 @@ if __name__ == "__main__":
     parser.add_argument('--exp_root', type=str, default='./data/experiments/')
     parser.add_argument('--pretrained_dir', type=str, default='./data/experiments/selfsupervised_learning/resnet_simCLR.pth') # './data/experiments/selfsupervised_learning/resnet_simCLR.pth'
     parser.add_argument('--model_name', type=str, default='resnet_simCLR_finetuned')
-    parser.add_argument('--dataset_name', type=str, default='cifar10', help='options: cifar10, cifar100, svhn')
+    parser.add_argument('--dataset_name', type=str, default='svhn', help='options: cifar10, cifar100, svhn')
     parser.add_argument('--mode', type=str, default='train')
     args = parser.parse_args()
     args.cuda = torch.cuda.is_available()
@@ -89,10 +90,9 @@ if __name__ == "__main__":
     
     state_dict = torch.load(args.pretrained_dir)
     model.load_state_dict(state_dict, strict=False)
-    # for name, param in model.named_parameters(): 
-    #     # if 'linear' not in name and 'layer4' not in name:
-    #     if 'linear' not in name:
-    #         param.requires_grad = False
+    for name, param in model.named_parameters(): 
+        if 'linear' not in name and 'layer4' not in name:
+            param.requires_grad = False
  
     if args.dataset_name == 'cifar10':
         labeled_train_loader = CIFAR10Loader(root=args.dataset_root, batch_size=args.batch_size, split='train', aug='once', shuffle=True, target_list = range(args.num_labeled_classes))

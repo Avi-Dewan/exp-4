@@ -12,7 +12,7 @@ from utils.util import cluster_acc, Identity, AverageMeter, seed_torch, str2bool
 from utils import ramps 
 from models.resnet import ResNet, BasicBlock 
 from modules.module import feat2prob, target_distribution 
-from data.cifarloader import CIFAR10Loader
+from data.svhnloader import SVHNLoader
 from tqdm import tqdm
 import numpy as np
 import warnings
@@ -269,8 +269,8 @@ if __name__ == "__main__":
     args.model_dir = model_dir+'/'+args.model_name+'.pth'
     args.save_txt_path= args.exp_root+ '{}/{}/{}'.format(runner_name, args.DTC, args.save_txt_name)
 
-    train_loader = CIFAR10Loader(root=args.dataset_root, batch_size=args.batch_size, split='train', aug='twice', shuffle=True, target_list=range(args.n_labeled_classes, args.n_labeled_classes+args.n_clusters))
-    eval_loader = CIFAR10Loader(root=args.dataset_root, batch_size=args.batch_size, split='train', aug=None, shuffle=False, target_list=range(args.n_labeled_classes, args.n_labeled_classes+args.n_clusters))
+    train_loader = SVHNLoader(root=args.dataset_root, batch_size=args.batch_size, split='train', aug='twice', shuffle=True, target_list=range(args.n_labeled_classes, args.n_labeled_classes+args.n_clusters))
+    eval_loader = SVHNLoader(root=args.dataset_root, batch_size=args.batch_size, split='train', aug=None, shuffle=False, target_list=range(args.n_labeled_classes, args.n_labeled_classes+args.n_clusters))
 
 
     model = ResNet(BasicBlock, [2,2,2,2], 5).to(device)
