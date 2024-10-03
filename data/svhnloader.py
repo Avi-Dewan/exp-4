@@ -44,7 +44,7 @@ class SVHN(data.Dataset):
                   "extra_32x32.mat", "a93ce644f1a588dc4d68dda5feec44a7"]}
 
     def __init__(self, root, split='train',
-                 transform=None, target_transform=None, download=False, target_list=range(5)):
+                 transform=None, target_transform=None, download=True, target_list=range(5)):
         self.root = os.path.expanduser(root)
         self.transform = transform
         self.target_transform = target_transform
