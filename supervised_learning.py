@@ -23,7 +23,6 @@ def train(model, train_loader, labeled_eval_loader, args):
         exp_lr_scheduler.step()
         for batch_idx, (x, label, idx) in enumerate(tqdm(train_loader)):
             x, label = x.to(device), label.to(device)
-            print(x.shape)
             output = model(x)
             loss= criterion(output, label)
             loss_record.update(loss.item(), x.size(0))
