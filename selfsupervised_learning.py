@@ -32,8 +32,9 @@ def train(model, device, train_loader, optimizer, scheduler, criterion, epoch, t
 
     for step, (data, label) in enumerate(tqdm(train_loader)):
         x_i, x_j = data[0], data[1]
-        print(x_i.shape)
-        x_i, x_j = x_i.squeeze().to(device).float(), x_j.squeeze().to(device).float()
+        # print(x_i.shape)
+        x_i, x_j = x_i.to(device).float(), x_j.to(device).float()
+        # print(x_i.shape)
         
         optimizer.zero_grad()
         z_i, z_j = model(x_i), model(x_j)
@@ -59,7 +60,7 @@ def test(model, device, valid_loader, criterion, epoch, total_epochs):
     with torch.no_grad():
         for step, (data, label) in enumerate(tqdm(valid_loader)):
             x_i, x_j = data[0], data[1]
-            x_i, x_j = x_i.squeeze().to(device).float(), x_j.squeeze().to(device).float()
+            x_i, x_j = x_i.to(device).float(), x_j.to(device).float()
             z_i, z_j = model(x_i), model(x_j)
             loss = criterion(z_i, z_j)
 
