@@ -13,7 +13,7 @@ import os.path
 import datetime
 import numpy as np
 from data.simCLRloader import SimCLRDataset
-from data.cifarloader import CIFAR10Loader, CIFAR10LoaderMix, CIFAR100Loader, CIFAR100LoaderMix
+from data.svhnloader import SVHNLoader
 from utils.util import AverageMeter, accuracy
 from models.resnet import BasicBlock
 from models.preModel import PreModel
@@ -193,7 +193,7 @@ def main():
         shuffle=False,
         drop_last=True)
 
-    dloader_unlabeled_test = CIFAR10Loader(
+    dloader_unlabeled_test = SVHNLoader(
         root=args.dataset_root, 
         batch_size=128, 
         split='test', 
