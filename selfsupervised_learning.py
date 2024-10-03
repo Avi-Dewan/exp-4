@@ -32,6 +32,7 @@ def train(model, device, train_loader, optimizer, scheduler, criterion, epoch, t
 
     for step, (data, label) in enumerate(tqdm(train_loader)):
         x_i, x_j = data[0], data[1]
+        print(x_i.shape)
         x_i, x_j = x_i.squeeze().to(device).float(), x_j.squeeze().to(device).float()
         
         optimizer.zero_grad()
