@@ -60,6 +60,7 @@ class SimCLRDataset(data.Dataset):
             if split != 'test':
                 self.transform = transforms.Compose([
                     transforms.Resize(32),  # Resize to 32x32 for compatibility with CIFAR
+                    transforms.Grayscale(num_output_channels=1),    # Convert to grayscale
                     transforms.RandomResizedCrop(32, scale=(0.8, 1.0)),
                     transforms.RandomApply([
                         transforms.ColorJitter(brightness=0.5, contrast=0.5)
@@ -72,6 +73,7 @@ class SimCLRDataset(data.Dataset):
             else:
                 self.transform = transforms.Compose([
                     transforms.Resize(32),  # Resize to 32x32 for compatibility with CIFAR
+                    transforms.Grayscale(num_output_channels=1),    # Convert to grayscale
                     transforms.ToTensor(),
                     transforms.Normalize(self.mean_pix, self.std_pix)  # Apply grayscale normalization
                 ])
