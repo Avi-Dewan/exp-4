@@ -251,7 +251,7 @@ if __name__ == "__main__":
     parser.add_argument('--seed', default=1, type=int)
     parser.add_argument('--save_txt', default=False, type=str2bool, help='save txt or not', metavar='BOOL')
     parser.add_argument('--pretrain_dir', type=str, default='./data/experiments/cifar10_classif/resnet18_cifar10_classif_5.pth')
-    parser.add_argument('--dataset_root', type=str, default='./data/datasets/CIFAR/')
+    parser.add_argument('--dataset_root', type=str, default='./data/datasets/SVHN/')
     parser.add_argument('--exp_root', type=str, default='./data/experiments/')
     parser.add_argument('--model_name', type=str, default='resnet18')
     parser.add_argument('--save_txt_name', type=str, default='result.txt')
