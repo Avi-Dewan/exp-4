@@ -69,7 +69,7 @@ if __name__ == "__main__":
     parser.add_argument('--step_size', default=10, type=int)
     parser.add_argument('--batch_size', default=128, type=int)
     parser.add_argument('--num_labeled_classes', default=5, type=int)
-    parser.add_argument('--dataset_root', type=str, default='./data/datasets/CIFAR/')
+    parser.add_argument('--dataset_root', type=str, default='./data/datasets/SVHN/')
     parser.add_argument('--exp_root', type=str, default='./data/experiments/')
     parser.add_argument('--pretrained_dir', type=str, default='./data/experiments/selfsupervised_learning/resnet_simCLR.pth') # './data/experiments/selfsupervised_learning/resnet_simCLR.pth'
     parser.add_argument('--model_name', type=str, default='resnet_simCLR_finetuned')
